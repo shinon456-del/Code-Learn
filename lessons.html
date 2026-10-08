@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CodeLearn: a hands-on HTML mini-curriculum for BTLED-ICT learners.">
+<title>Lessons | CodeLearn</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="blobs" aria-hidden="true"><i></i><i></i></div>
+<header class="bar"><a class="brand" href="index.html"><span class="mark">&lt;/&gt;</span>CodeLearn</a>
+<nav aria-label="Main"><a href="index.html">Home</a><a href="pretest.html">Pre-test</a><a href="lessons.html" aria-current="page">Lessons</a><a href="lab.html">Code lab</a><a href="assessment.html">Assessment</a><a href="teacher.html">For teachers</a></nav>
+<div class="meter" title="Your progress"><span id="pText">0%</span><i><b id="pBar"></b></i></div></header>
+<main><div class="pagehead"><h1>Lessons</h1><p>Four short lessons. Answer each quick check to complete a lesson.</p></div><section id="learn" class="sec">
+  <div class="lessons">
+    <div class="tabs" role="tablist" aria-label="Lessons" id="tabs"></div>
+    <article class="card" id="lessonCard" aria-live="polite">
+      <h3 id="lTitle"></h3>
+      <div id="lBody"></div>
+      <div class="tryit" id="lTry"></div>
+      <div class="quick" id="lQuick"></div>
+      <div class="foot">
+        <button class="btn" id="prev">Back</button>
+        <span id="lStatus"></span>
+        <button class="btn primary" id="next">Next lesson</button>
+      </div>
+    </article>
+  </div>
+</section></main><footer><b>CodeLearn</b> · Curriculum Development and Evaluation · BTLED-ICT</footer>
+<script src="js/script.js"></script></body></html>

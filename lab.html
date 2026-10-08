@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CodeLearn: a hands-on HTML mini-curriculum for BTLED-ICT learners.">
+<title>Code lab | CodeLearn</title><link rel="stylesheet" href="css/style.css"></head>
+<body><div class="blobs" aria-hidden="true"><i></i><i></i></div>
+<header class="bar"><a class="brand" href="index.html"><span class="mark">&lt;/&gt;</span>CodeLearn</a>
+<nav aria-label="Main"><a href="index.html">Home</a><a href="pretest.html">Pre-test</a><a href="lessons.html">Lessons</a><a href="lab.html" aria-current="page">Code lab</a><a href="assessment.html">Assessment</a><a href="teacher.html">For teachers</a></nav>
+<div class="meter" title="Your progress"><span id="pText">0%</span><i><b id="pBar"></b></i></div></header>
+<main><div class="pagehead"><h1>Code Quest</h1><p>Become an HTML hero. Complete quests, defeat coding monsters, earn XP, and build your webpage skills one challenge at a time.</p></div><section id="lab" class="sec tint">
+  <div class="rpg-panel" aria-label="CodeLearn RPG progress">
+    <div class="rpg-top">
+      <div><span class="eyebrow">HTML ADVENTURE</span><h2 id="heroTitle">Novice Web Hero</h2><p id="heroStatus">Your first quest is waiting.</p></div>
+      <div class="xp-box"><strong id="xpText">0 XP</strong><span>Quest XP</span><i><b id="xpBar"></b></i></div>
+    </div>
+    <div class="battle-scene" id="battleScene" data-m="0" data-lv="1" aria-live="polite">
+      <!-- Backdrop -->
+      <svg class="scene-bg" viewBox="0 0 900 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--s1)"/><stop offset="1" style="stop-color:var(--s2)"/></linearGradient>
+          <radialGradient id="moonG"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="900" height="300" fill="url(#skyG)"/>
+        <g class="stars" fill="#fff">
+          <circle cx="60" cy="40" r="1.6"/><circle cx="140" cy="90" r="1.2"/><circle cx="210" cy="30" r="1.8"/><circle cx="290" cy="70" r="1.2"/><circle cx="360" cy="25" r="1.5"/><circle cx="430" cy="95" r="1.2"/><circle cx="500" cy="45" r="1.8"/><circle cx="570" cy="20" r="1.2"/><circle cx="640" cy="80" r="1.5"/><circle cx="700" cy="35" r="1.2"/><circle cx="820" cy="110" r="1.6"/><circle cx="870" cy="50" r="1.2"/><circle cx="100" cy="140" r="1.1"/><circle cx="330" cy="130" r="1.1"/><circle cx="600" cy="140" r="1.1"/>
+        </g>
+        <circle cx="770" cy="70" r="70" fill="url(#moonG)"/><circle cx="770" cy="70" r="24" fill="#f6f1d6"/><circle cx="762" cy="64" r="4" fill="#e3dcb8"/><circle cx="780" cy="80" r="3" fill="#e3dcb8"/>
+        <path style="fill:var(--hill1)" d="M0 210 L90 140 L170 195 L260 120 L350 200 L430 150 L520 205 L620 130 L720 200 L810 145 L900 195 V300 H0Z"/>
+        <path style="fill:var(--hill2)" d="M0 235 Q120 190 240 225 T480 222 T720 224 T900 215 V300 H0Z"/>
+        <rect style="fill:var(--ground)" y="236" width="900" height="64"/>
+        <path d="M0 236 H900" stroke="rgba(255,255,255,.1)" stroke-width="2"/>
+        <g class="grass" stroke="rgba(255,255,255,.14)" stroke-width="2" stroke-linecap="round" fill="none">
+          <path d="M40 262 l-3 -9 M45 262 l2 -10 M50 262 l4 -8"/><path d="M200 276 l-3 -9 M205 276 l2 -10 M210 276 l4 -8"/><path d="M420 266 l-3 -9 M425 266 l2 -10 M430 266 l4 -8"/><path d="M640 278 l-3 -9 M645 278 l2 -10 M650 278 l4 -8"/><path d="M840 264 l-3 -9 M845 264 l2 -10 M850 264 l4 -8"/>
+        </g>
+        <g class="fireflies" fill="#fff6a8"><circle cx="120" cy="215" r="2.4"/><circle cx="330" cy="190" r="2"/><circle cx="470" cy="220" r="2.4"/><circle cx="610" cy="195" r="2"/><circle cx="760" cy="215" r="2.4"/><circle cx="880" cy="190" r="2"/></g>
+      </svg>
+
+      <!-- HERO -->
+      <div class="char hero-char">
+        <div class="nameplate hero-plate"><b id="heroName">Lv.1 Novice Web Hero</b></div>
+        <div class="hero-fx">
+        <svg class="hero-svg" viewBox="0 0 160 190" role="img" aria-label="HTML hero, a knight with a sword and shield">
+          <defs>
+            <linearGradient id="hArmor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9ebcff"/><stop offset="1" stop-color="#3b5fc2"/></linearGradient>
+            <linearGradient id="hSteel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8eefb"/><stop offset="1" stop-color="#8e9bb8"/></linearGradient>
+            <radialGradient id="hAura"><stop offset="0" stop-color="#8ec5ff" stop-opacity=".55"/><stop offset="1" stop-color="#8ec5ff" stop-opacity="0"/></radialGradient>
+          </defs>
+          <ellipse class="shadow" cx="80" cy="180" rx="38" ry="6" fill="#000" opacity=".4"/>
+          <circle class="aura lv4" cx="80" cy="100" r="76" fill="url(#hAura)"/>
+          <g class="h-bob">
+            <g class="h-cape">
+              <path d="M66 76 Q42 104 44 156 Q56 148 64 154 Q72 112 78 84Z" fill="#c54848"/>
+              <path d="M66 76 Q52 104 54 150 Q62 118 78 84Z" fill="#972f2f"/>
+              <path class="lv2" d="M66 76 Q42 104 44 156" fill="none" stroke="#f4d27a" stroke-width="2.5"/>
+            </g>
+            <rect x="67" y="124" width="12" height="42" rx="5" fill="#2c3a5a"/><rect x="83" y="124" width="12" height="42" rx="5" fill="#2c3a5a"/>
+            <rect x="63" y="162" width="20" height="14" rx="5" fill="#4a3426"/><rect x="82" y="162" width="23" height="14" rx="5" fill="#4a3426"/>
+            <path d="M63 80 Q80 72 99 80 L103 128 Q81 138 61 128Z" fill="url(#hArmor)" stroke="#2b4590" stroke-width="2"/>
+            <rect x="61" y="118" width="42" height="9" rx="2" fill="#c9983a"/><rect x="76" y="116" width="12" height="13" rx="2" fill="#f4d27a"/>
+            <text x="86" y="104" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-weight="800" font-size="11" fill="#fff">&lt;/&gt;</text>
+            <ellipse cx="63" cy="82" rx="11" ry="8" fill="#9db9ff" stroke="#2b4590" stroke-width="2"/>
+            <path class="lv3" d="M63 80 Q80 72 99 80" stroke="#f4d27a" stroke-width="3" fill="none"/>
+            <ellipse class="lv3" cx="63" cy="82" rx="11" ry="8" fill="none" stroke="#f4d27a" stroke-width="2.5"/>
+            <g class="h-shield"><path d="M46 96 H70 V114 Q70 130 58 136 Q46 130 46 114Z" fill="#2f4fa8" stroke="#f4d27a" stroke-width="3"/><path d="M58 102 V128 M50 112 H66" stroke="#f4d27a" stroke-width="3"/></g>
+            <g class="h-head">
+              <rect x="74" y="66" width="12" height="10" fill="#e0b08a"/>
+              <circle cx="82" cy="52" r="17" fill="#f2c6a0"/>
+              <g class="h-blink"><ellipse cx="75" cy="54" rx="2.6" ry="3.2" fill="#172033"/><ellipse cx="91" cy="54" rx="2.6" ry="3.2" fill="#172033"/></g>
+              <path d="M77 63 Q83 68 89 63" stroke="#8a4b3a" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M63 54 Q62 28 82 28 Q102 28 101 54 L95 54 L95 47 Q82 40 69 47 L69 54Z" fill="url(#hSteel)" stroke="#5f6d88" stroke-width="2"/>
+              <rect x="80" y="44" width="4" height="14" rx="2" fill="#aeb9cf"/>
+              <rect x="79" y="22" width="6" height="10" rx="2" fill="#aeb9cf"/>
+              <path class="h-plume" d="M82 24 Q56 6 44 30 Q62 22 80 34Z" fill="#e04a4a"/>
+            </g>
+            <g class="h-arm">
+              <path d="M100 84 L116 104" stroke="#6f93e8" stroke-width="10" stroke-linecap="round"/>
+              <ellipse cx="100" cy="82" rx="10" ry="8" fill="#9db9ff" stroke="#2b4590" stroke-width="2"/>
+              <ellipse class="lv3" cx="100" cy="82" rx="10" ry="8" fill="none" stroke="#f4d27a" stroke-width="2.5"/>
+              <g class="h-sword">
+                <path class="lv4 blade-glow" d="M118 100 L118 30 L121.5 22 L125 30 L125 100Z" fill="#7fe3ff" stroke="#7fe3ff" stroke-width="6" opacity=".55"/>
+                <path d="M118 100 L118 30 L121.5 22 L125 30 L125 100Z" fill="#eef3fb" stroke="#8b97ad" stroke-width="1.5"/>
+                <path d="M121.5 34 V96" stroke="#c4cfe2" stroke-width="1.5"/>
+                <rect x="112" y="98" width="19" height="5" rx="2.5" fill="#d7a84b"/><rect x="119" y="103" width="5" height="11" rx="2" fill="#5b3a22"/><circle cx="121.5" cy="116" r="3.5" fill="#d7a84b"/>
+                <path class="glint" d="M121.5 40 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="#fff"/>
+              </g>
+              <circle cx="118" cy="105" r="6" fill="#aeb9cf" stroke="#5f6d88" stroke-width="1.5"/>
+            </g>
+          </g>
+        </svg>
+        </div>
+      </div>
+
+      <div class="battle-middle"><span class="battle-label" id="battleLabel">QUEST 1</span><div class="vs">VS</div><span id="battleHint">Write code to attack.</span><button class="btn battle-attack" id="battleAttack" type="button">Attack Monster</button></div>
+
+      <!-- MONSTERS (one visible at a time) -->
+      <div class="char monster-char">
+        <div class="taunt" id="taunt" role="status"></div>
+        <div class="nameplate"><b id="monName">Title Goblin</b><span class="hp"><i id="monHp"></i></span></div>
+        <div class="mon-fx">
+          <svg class="slash" viewBox="0 0 80 120" aria-hidden="true"><path d="M64 6 Q10 56 52 114 Q28 58 64 6Z" fill="#fff"/></svg>
+          <svg class="spark" viewBox="0 0 60 60" aria-hidden="true"><path d="M30 2 L36 22 L58 30 L36 38 L30 58 L24 38 L2 30 L24 22Z" fill="#ffe27a"/></svg>
+          <span class="hit-text" id="hitText">HIT!</span>
+
+          <!-- 0 · Title Goblin -->
+          <svg class="mon m0" viewBox="0 0 160 190" role="img" aria-label="Title Goblin, a green goblin with a scrambled sign">
+            <ellipse class="shadow" cx="80" cy="180" rx="36" ry="6" fill="#000" opacity=".4"/>
+            <g class="g-hop">
+              <g class="g-club"><path d="M110 126 L132 70" stroke="#7a5230" stroke-width="9" stroke-linecap="round"/><circle cx="134" cy="62" r="13" fill="#8a5d36"/><circle cx="126" cy="54" r="3" fill="#ddd6c6"/><circle cx="143" cy="57" r="3" fill="#ddd6c6"/><circle cx="136" cy="49" r="3" fill="#ddd6c6"/></g>
+              <rect x="62" y="150" width="14" height="26" rx="6" fill="#4f9a3d"/><rect x="84" y="150" width="14" height="26" rx="6" fill="#4f9a3d"/>
+              <ellipse cx="66" cy="176" rx="13" ry="6" fill="#3f7f31"/><ellipse cx="94" cy="176" rx="13" ry="6" fill="#3f7f31"/>
+              <ellipse cx="80" cy="124" rx="30" ry="34" fill="#5fae4b"/><ellipse cx="80" cy="130" rx="19" ry="24" fill="#8ccf6e"/>
+              <path d="M52 118 Q80 146 108 118 L112 154 L99 146 L90 156 L80 146 L70 156 L61 146 L48 154Z" fill="#7a5230"/>
+              <path d="M104 112 Q116 118 112 128" stroke="#5fae4b" stroke-width="9" fill="none" stroke-linecap="round"/>
+              <g class="g-sign">
+                <path d="M30 120 L38 136" stroke="#7a5230" stroke-width="5" stroke-linecap="round"/>
+                <rect x="6" y="86" width="46" height="32" rx="4" fill="#d9b277" stroke="#7a5230" stroke-width="3"/>
+                <text x="29" y="109" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-weight="800" font-size="17" fill="#7a1f1f">1H?</text>
+                <path d="M56 114 Q46 116 40 128" stroke="#5fae4b" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="38" cy="130" r="7" fill="#6fc15a"/>
+              </g>
+              <g class="g-head">
+                <path class="g-ear l" d="M54 66 L14 44 L50 88Z" fill="#6fc15a"/><path d="M50 68 L28 55 L48 80Z" fill="#e89aa0"/>
+                <path class="g-ear r" d="M106 66 L146 44 L110 88Z" fill="#6fc15a"/><path d="M110 68 L132 55 L112 80Z" fill="#e89aa0"/>
+                <ellipse cx="80" cy="72" rx="31" ry="27" fill="#6fc15a"/>
+                <path d="M56 56 L76 63" stroke="#2f5a25" stroke-width="4" stroke-linecap="round"/><path d="M104 56 L84 63" stroke="#2f5a25" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="67" cy="69" r="9" fill="#fff"/><circle cx="93" cy="69" r="9" fill="#fff"/>
+                <g class="g-pupils"><circle cx="70" cy="71" r="3.8" fill="#1d1d1d"/><circle cx="90" cy="71" r="3.8" fill="#1d1d1d"/></g>
+                <path d="M80 74 Q87 84 80 87 Q73 84 80 74Z" fill="#5aa044"/>
+                <path d="M60 89 Q80 108 100 89 Q80 95 60 89Z" fill="#3b1d1d"/><path d="M66 91 l4 7 4 -6z M86 92 l4 6 4 -7z" fill="#fff"/>
+                <circle cx="100" cy="82" r="2" fill="#4a8f38"/><circle cx="58" cy="80" r="1.6" fill="#4a8f38"/>
+              </g>
+            </g>
+          </svg>
+
+          <!-- 1 · Link Phantom -->
+          <svg class="mon m1" viewBox="0 0 160 190" role="img" aria-label="Link Phantom, a ghost holding a broken chain">
+            <defs>
+              <linearGradient id="pGhost" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef2ff"/><stop offset="1" stop-color="#8aa0ff" stop-opacity=".5"/></linearGradient>
+              <radialGradient id="pGlow"><stop offset="0" stop-color="#8aa0ff" stop-opacity=".45"/><stop offset="1" stop-color="#8aa0ff" stop-opacity="0"/></radialGradient>
+            </defs>
+            <ellipse class="shadow p-shadow" cx="80" cy="180" rx="30" ry="5" fill="#000" opacity=".35"/>
+            <g class="p-float">
+              <circle cx="80" cy="98" r="74" fill="url(#pGlow)"/>
+              <g class="p-orbit">
+                <ellipse cx="80" cy="26" rx="9" ry="5" fill="none" stroke="#9fb5ff" stroke-width="3"/>
+                <ellipse cx="143" cy="134" rx="9" ry="5" fill="none" stroke="#9fb5ff" stroke-width="3" transform="rotate(60 143 134)"/>
+                <ellipse cx="17" cy="134" rx="9" ry="5" fill="none" stroke="#9fb5ff" stroke-width="3" transform="rotate(-60 17 134)"/>
+              </g>
+              <g class="p-body">
+                <path d="M38 150 Q30 56 80 44 Q130 56 122 150 Q112 134 101 152 Q90 134 80 154 Q70 134 59 152 Q48 134 38 150Z" fill="url(#pGhost)" opacity=".93"/>
+                <path d="M52 70 Q60 52 80 50" stroke="#fff" opacity=".65" stroke-width="4" fill="none" stroke-linecap="round"/>
+                <path d="M42 106 Q18 112 14 134 Q28 126 40 128Z" fill="#cdd9ff" opacity=".92"/><path d="M118 106 Q142 112 146 134 Q132 126 120 128Z" fill="#cdd9ff" opacity=".92"/>
+                <path d="M54 74 L74 83" stroke="#141a4a" stroke-width="4" stroke-linecap="round"/><path d="M106 74 L86 83" stroke="#141a4a" stroke-width="4" stroke-linecap="round"/>
+                <ellipse cx="65" cy="91" rx="8" ry="11" fill="#141a4a"/><ellipse cx="95" cy="91" rx="8" ry="11" fill="#141a4a"/>
+                <circle cx="67" cy="89" r="3" fill="#6ff2ff"/><circle cx="93" cy="89" r="3" fill="#6ff2ff"/>
+                <ellipse class="p-mouth" cx="80" cy="120" rx="9" ry="12" fill="#141a4a"/>
+              </g>
+              <g class="p-chain"><path d="M16 136 Q80 192 144 136" fill="none" stroke="#9fb5ff" stroke-width="5" stroke-dasharray="9 6" stroke-linecap="round"/><circle cx="16" cy="136" r="5" fill="#cdd9ff"/><circle cx="144" cy="136" r="5" fill="#cdd9ff"/></g>
+            </g>
+          </svg>
+
+          <!-- 2 · Media Beast -->
+          <svg class="mon m2" viewBox="0 0 160 190" role="img" aria-label="Media Beast, a one-eyed orange monster with a picture frame on its belly">
+            <ellipse class="shadow" cx="80" cy="180" rx="50" ry="7" fill="#000" opacity=".4"/>
+            <g class="b-breath">
+              <ellipse cx="52" cy="171" rx="19" ry="10" fill="#b8541f"/><ellipse cx="108" cy="171" rx="19" ry="10" fill="#b8541f"/>
+              <g class="b-arm l"><path d="M44 98 Q14 112 20 146" stroke="#e0793c" stroke-width="18" stroke-linecap="round" fill="none"/><circle cx="20" cy="150" r="13" fill="#e0793c"/><path d="M12 158 l-2 7 M20 161 l0 7 M28 158 l2 7" stroke="#f4e6c4" stroke-width="3" stroke-linecap="round"/></g>
+              <g class="b-arm r"><path d="M116 98 Q146 112 140 146" stroke="#e0793c" stroke-width="18" stroke-linecap="round" fill="none"/><circle cx="140" cy="150" r="13" fill="#e0793c"/><path d="M132 158 l-2 7 M140 161 l0 7 M148 158 l2 7" stroke="#f4e6c4" stroke-width="3" stroke-linecap="round"/></g>
+              <ellipse cx="80" cy="118" rx="44" ry="52" fill="#e0793c"/>
+              <path d="M46 98 q10 4 8 16 M114 98 q-10 4 -8 16 M48 130 q8 2 8 12 M112 130 q-8 2 -8 12" stroke="#b8541f" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <ellipse cx="80" cy="134" rx="29" ry="32" fill="#f7be8a"/>
+              <rect x="61" y="118" width="38" height="30" rx="3" fill="#5b3a22"/><rect x="65" y="122" width="30" height="22" fill="#7ec8ff"/>
+              <path d="M65 144 L75 131 L81 138 L88 129 L95 144Z" fill="#3a8f5a"/><circle cx="72" cy="128" r="3" fill="#ffe27a"/>
+              <g class="b-head">
+                <path d="M52 52 Q38 30 56 20 Q56 40 64 48Z" fill="#f4e6c4"/><path d="M108 52 Q122 30 104 20 Q104 40 96 48Z" fill="#f4e6c4"/>
+                <ellipse cx="80" cy="66" rx="36" ry="32" fill="#e8873f"/>
+                <circle cx="80" cy="62" r="19" fill="#fff" stroke="#b8541f" stroke-width="3"/>
+                <g class="b-iris"><circle cx="80" cy="62" r="10" fill="#27b5a8"/><circle cx="80" cy="62" r="5" fill="#0b2a2a"/><circle cx="76" cy="58" r="2.2" fill="#fff"/></g>
+                <ellipse class="b-blink" cx="80" cy="62" rx="20" ry="20" fill="#e8873f"/>
+                <path d="M57 45 L80 54 L103 45" stroke="#7a3512" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M54 86 Q80 104 106 86 Q80 92 54 86Z" fill="#3b1810"/><path d="M62 89 l4 8 4 -7z M90 89 l4 7 4 -8z" fill="#fff"/>
+              </g>
+            </g>
+          </svg>
+
+          <!-- 3 · Web Guardian -->
+          <svg class="mon m3" viewBox="0 0 160 190" role="img" aria-label="Web Guardian, a crowned armored spider boss">
+            <defs><radialGradient id="sAbd" cx=".4" cy=".35"><stop offset="0" stop-color="#6a4fb0"/><stop offset="1" stop-color="#2a1d52"/></radialGradient></defs>
+            <ellipse class="shadow" cx="84" cy="181" rx="62" ry="7" fill="#000" opacity=".45"/>
+            <g class="s-web" stroke="#9fd4ff" fill="none" stroke-width="1" opacity=".4"><circle cx="124" cy="34" r="14" stroke-dasharray="4 3"/><circle cx="124" cy="34" r="27" stroke-dasharray="5 3"/><path d="M124 34 L88 12 M124 34 L124 -4 M124 34 L160 12 M124 34 L160 44 M124 34 L152 70 M124 34 L96 64 M124 34 L88 40"/></g>
+            <g class="s-bob">
+              <g class="legs far" fill="none" stroke="#1d1535" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                <path class="s-leg" style="transform-origin:56px 108px;animation-delay:-.1s" d="M56 108 L22 88 L16 176"/>
+                <path class="s-leg" style="transform-origin:68px 114px;animation-delay:-.6s" d="M68 114 L42 96 L40 176"/>
+                <path class="s-leg" style="transform-origin:92px 114px;animation-delay:-.1s" d="M92 114 L128 96 L134 176"/>
+                <path class="s-leg" style="transform-origin:106px 110px;animation-delay:-.6s" d="M106 110 L146 90 L152 176"/>
+              </g>
+              <g class="legs near" fill="none" stroke="#3a2c69" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                <path class="s-leg" style="transform-origin:60px 114px;animation-delay:-.6s" d="M60 114 L30 104 L28 176"/>
+                <path class="s-leg" style="transform-origin:72px 120px;animation-delay:-.1s" d="M72 120 L54 108 L58 176"/>
+                <path class="s-leg" style="transform-origin:94px 120px;animation-delay:-.6s" d="M94 120 L116 106 L114 176"/>
+                <path class="s-leg" style="transform-origin:106px 116px;animation-delay:-.1s" d="M106 116 L140 104 L144 176"/>
+              </g>
+              <ellipse cx="102" cy="112" rx="38" ry="32" fill="url(#sAbd)" stroke="#1d1535" stroke-width="2"/>
+              <g class="s-glow" fill="none" stroke="#7ee8ff" stroke-width="1.6"><circle cx="102" cy="112" r="14"/><circle cx="102" cy="112" r="25" stroke-dasharray="4 4"/><path d="M102 82 V142 M72 112 H132 M80 90 L124 134 M124 90 L80 134" opacity=".6"/></g>
+              <text class="s-glow" x="102" y="117" text-anchor="middle" font-family="ui-monospace,Consolas,monospace" font-weight="800" font-size="13" fill="#7ee8ff">&lt;/&gt;</text>
+              <circle cx="58" cy="102" r="24" fill="#4b3a80" stroke="#1d1535" stroke-width="2"/>
+              <path d="M42 113 L37 133 L48 118Z M56 119 L54 136 L64 121Z" fill="#f4e6c4"/>
+              <circle cx="46" cy="97" r="6" fill="#ff4d6d"/><circle cx="60" cy="92" r="6" fill="#ff4d6d"/><circle cx="38" cy="107" r="3.2" fill="#ff4d6d"/><circle cx="52" cy="106" r="3.2" fill="#ff4d6d"/>
+              <circle cx="44" cy="95" r="2" fill="#fff"/><circle cx="58" cy="90" r="2" fill="#fff"/>
+              <g class="s-crown"><path d="M44 80 L46 62 L54 72 L60 58 L66 72 L74 62 L74 80Z" fill="#f4d27a" stroke="#b78a2a" stroke-width="2" stroke-linejoin="round"/><circle cx="60" cy="74" r="3" fill="#ff4d6d"/></g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="quest-title"><div><span class="eyebrow">QUEST BOARD</span><h2>Choose your coding quest</h2></div><span id="questCount" class="quest-count">0 / 3 defeated</span></div>
+  <div class="missions" id="missions"></div>
+  <button class="battle-float" id="attackFloat" type="button" aria-label="Attack the current coding monster">Attack</button>
+  <div class="lab">
+    <div class="pane">
+      <div class="paneBar"><span>index.html</span><button class="link" id="reset">Reset</button></div>
+      <textarea id="editor" spellcheck="false" aria-label="HTML editor"></textarea>
+    </div>
+    <div class="pane">
+      <div class="paneBar"><span>Preview</span><span class="live">Live</span></div>
+      <iframe id="frame" title="Live preview" sandbox=""></iframe>
+    </div>
+  </div>
+  <div class="mbar">
+    <p id="mTask"></p>
+    <button class="btn primary" id="checkM">Attack the Monster</button>
+  </div>
+  <p class="fb" id="mFb" role="status"></p>
+</section></main><footer><b>CodeLearn</b> · Curriculum Development and Evaluation · BTLED-ICT</footer>
+<script src="js/script.js"></script></body></html>
