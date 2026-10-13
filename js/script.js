@@ -17,8 +17,8 @@ function logSet(kind, rec) {
 /* send results to the teacher's Google Sheet (see apps-script/Code.gs). Leave empty to keep everything on the device only. */
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbzHfaV5hzhVAjwkEIsFefsWsgimVeo1efo5Ox81Euc696Mzn6Ej7giVRif9Kk8DjKzwVA/exec";
 /* optional: your Google Sheet's normal link (the one in the address bar). Only shown as a button on the teacher page. */
-const SHEET_VIEW_URL = "https://docs.google.com/spreadsheets/d/1Vo7c3ZE2l4MDhzkRgpZA8tb5y5-9gOu8QQ5TPoqmoHo/edit?gid=0#gid=0";
-const sentNote = () => SHEET_URL ? '<p class="why">Your results were sent to your teacher. If you are offline, they will send automatically when you are back online.</p>' : "";
+const SHEET_VIEW_URL = "";
+const sentNote = () => SHEET_URL ? '<p class="why">Your results are queued for submission to your teacher. Check the teacher Google Sheet to confirm they arrived.</p>' : "";
 const iloN = (set, ans, k) => set.filter((q, i) => q.ilo === k && ans[i] === q.a).length;
 function send(type, data) {
   if (!SHEET_URL) return;
@@ -148,7 +148,7 @@ function progress() {
 
 /* lessons */
 function renderTabs() {
-  $("tabs").innerHTML = LESSONS.map((l, i) => `<button class="tab" role="tab" data-i="${i}" aria-selected="${i === S.cur}"><span>${i + 1}. ${l.t}</span>${S.lessons.includes(i) ? '<span class="tick">✓</span>' : ""}</button>`).join("");
+  $("tabs").innerHTML = LESSONS.map((l, i) => `<button class="tab" role="tab" data-i="${i}" aria-selected="${i === S.cur}"><span>${i + 1}. ${l.t}</span>${S.lessons.includes(i) ? '<span class="tick" role="img" aria-label="Completed"></span>' : ""}</button>`).join("");
 }
 function renderLesson() {
   const l = LESSONS[S.cur];
@@ -187,7 +187,7 @@ editor.addEventListener("keydown", e => {
 });
 $("reset").onclick = () => { editor.value = BASE; run(); setFb("", ""); };
 function renderMissions() {
-  $("missions").innerHTML = MISSIONS.map((x, i) => { const unlocked=questUnlocked(i), done=x.bonus ? !!S.bonus : S.missions.includes(i); return `<button class="chip quest-chip ${done ? "done" : ""} ${!unlocked ? "locked" : ""}" data-i="${i}" aria-pressed="${i === m}" ${unlocked ? "" : "disabled"}><span class="quest-icon">${done ? "✓" : (i === 3 ? "F" : (i+1))}</span><span><b>${x.n}</b><small>${unlocked ? `${x.xp} XP` : "Locked · defeat the previous quest"}</small></span></button>`; }).join("");
+  $("missions").innerHTML = MISSIONS.map((x, i) => { const unlocked=questUnlocked(i), done=x.bonus ? !!S.bonus : S.missions.includes(i); return `<button class="chip quest-chip ${done ? "done" : ""} ${!unlocked ? "locked" : ""}" data-i="${i}" aria-pressed="${i === m}" ${unlocked ? "" : "disabled"}><span class="quest-icon">${done ? '<i class="ck" aria-hidden="true"></i>' : (i === 3 ? "F" : (i+1))}</span><span><b>${x.n}</b><small>${unlocked ? `${x.xp} XP` : "Locked · defeat the previous quest"}</small></span></button>`; }).join("");
   $("mTask").textContent = MISSIONS[m].task;
   $("checkM").textContent = MISSIONS[m].bonus ? "Attack the Guardian" : "Attack the Monster";
   updateRPG();
@@ -240,7 +240,7 @@ const attackFloat=document.getElementById("attackFloat"); if(attackFloat) attack
 /* quiz */
 function renderQuiz(review) {
   if (!document.getElementById("quiz")) return;
-  const nameBox = (!S.who && !review) ? `<p><label><b>Your full name</b> (use the same name as your pre-test)<br><input id="postWho" type="text" autocomplete="name" style="width:100%;max-width:22rem;padding:.5rem;margin-top:.3rem"></label></p>` : "";
+  const nameBox = (!S.who && !review) ? `<p><label><b>Your first name</b> (use the same first name as your pre-test)<br><input id="postWho" type="text" autocomplete="given-name" required maxlength="40" placeholder="First name" style="width:100%;max-width:22rem;padding:.5rem;margin-top:.3rem"></label></p>` : "";
   $("quiz").innerHTML = nameBox + QUIZ.map((q, i) => `<fieldset data-i="${i}"><legend>${i + 1}. ${esc(q.q)}</legend>${q.o.map((o, j) => `<label><input type="radio" name="q${i}" value="${j}" ${review && review.ans[i] === j ? "checked" : ""} ${review ? "disabled" : ""}> ${esc(o)}</label>`).join("")}<p class="why" id="why${i}"></p></fieldset>`).join("") + `<button class="btn primary" type="submit" id="sub">${review ? "Retake assessment" : "Submit answers"}</button>`;
   if (review) QUIZ.forEach((q, i) => { const f = document.querySelector(`fieldset[data-i="${i}"]`); const ok = review.ans[i] === q.a; f.classList.add(ok ? "right" : "wrong"); $("why" + i).textContent = (ok ? "Correct. " : `Correct answer: ${q.o[q.a]}. `) + q.why; });
 }
@@ -252,8 +252,8 @@ $("quiz").addEventListener("submit", e => {
   ans.forEach((a, i) => { const f = document.querySelector(`fieldset[data-i="${i}"]`); f.classList.toggle("missing", a === null); if (a === null) missing = true; });
   if (missing) { const r = $("result"); r.className = "result show"; r.innerHTML = "Please answer every question. Unanswered ones are marked in red."; return; }
   if (!S.who) {
-    const nm = ($("postWho").value || "").trim();
-    if (!nm) { const r = $("result"); r.className = "result show"; r.innerHTML = "Please type your full name first."; return; }
+    const nm = ($("postWho").value || "").trim().replace(/\s+/g, " ").split(" ")[0];
+    if (!nm) { const r = $("result"); r.className = "result show"; r.innerHTML = "Please type your first name."; return; }
     S.who = nm; const hit = LOG[nkey(nm)]; if (!S.pre && hit && hit.pre) S.pre = { score: hit.pre.score, ans: [], at: hit.pre.at, fromLog: true, ilo1: hit.pre.ilo1, ilo3: hit.pre.ilo3 };
   }
   const score = ans.filter((a, i) => a === QUIZ[i].a).length;
@@ -280,7 +280,7 @@ function renderFb() {
   const avg = k => (S.fb.reduce((s, f) => s + +f[k], 0) / n).toFixed(1);
   box.innerHTML = `<b>${n} response${n > 1 ? "s" : ""}</b>. Clarity ${avg("clear")}/5, technology helped ${avg("tech")}/5, could complete ${avg("done")}/5.` + (S.fb.some(f => f.note) ? "<br>Suggestions: " + S.fb.filter(f => f.note).map(f => esc(f.note)).join("; ") : "");
 }
-$("fbForm").addEventListener("submit", e => { e.preventDefault(); const d = Object.fromEntries(new FormData(e.target)); S.fb.push(d); save(); send("feedback", { ...d, who: "" }); e.target.reset(); renderFb(); });
+$("fbForm").addEventListener("submit", e => { e.preventDefault(); const d = Object.fromEntries(new FormData(e.target)); S.fb.push(d); save(); send("feedback", { ...d, who: (d.name || S.who || "").trim().replace(/\s+/g, " ").split(" ")[0] }); e.target.reset(); renderFb(); });
 const plan = $("plan");
 if (S.plan) plan.querySelectorAll("tr:not(:first-child)").forEach((r, i) => r.querySelectorAll("td").forEach((c, j) => { if (S.plan[i] && S.plan[i][j] != null) c.textContent = S.plan[i][j]; }));
 plan.addEventListener("input", () => { S.plan = [...plan.querySelectorAll("tr:not(:first-child)")].map(r => [...r.querySelectorAll("td")].map(c => c.textContent)); save(); });
@@ -360,12 +360,12 @@ const PRE = [
 function renderPre() {
   const f = document.getElementById("preForm"); if (!f) return;
   if (S.pre) { f.innerHTML = `<p><b>Pre-test saved.</b> You answered ${S.pre.score} of 5 correctly. Please move on to the lessons. The pre-test can only be taken once so that your results stay fair.</p><div class="row"><a class="btn primary" href="lessons.html">Start the lessons</a><button class="btn" type="button" id="nextLearner">Done. Next learner</button></div><p class="why">Sharing this device? Press "Done. Next learner" so the next person can take the pre-test. Your score is kept in the class log.</p>${sentNote()}`; document.getElementById("nextLearner").onclick = () => { try { localStorage.removeItem(KEY); } catch (e) {} location.reload(); }; return; }
-  f.innerHTML = `<p><label><b>Your full name</b><br><input id="preWho" type="text" autocomplete="name" style="width:100%;max-width:22rem;padding:.5rem;margin-top:.3rem"></label></p>` + PRE.map((q, i) => `<fieldset data-i="${i}"><legend>${i + 1}. ${esc(q.q)}</legend>${q.o.map((o, j) => `<label><input type="radio" name="p${i}" value="${j}"> ${esc(o)}</label>`).join("")}</fieldset>`).join("") + `<button class="btn primary" type="submit">Save pre-test</button><p class="why" id="preMsg" role="status"></p>`;
+  f.innerHTML = `<p><label><b>Your first name</b><br><input id="preWho" type="text" autocomplete="given-name" required maxlength="40" placeholder="First name" style="width:100%;max-width:22rem;padding:.5rem;margin-top:.3rem"></label></p>` + PRE.map((q, i) => `<fieldset data-i="${i}"><legend>${i + 1}. ${esc(q.q)}</legend>${q.o.map((o, j) => `<label><input type="radio" name="p${i}" value="${j}"> ${esc(o)}</label>`).join("")}</fieldset>`).join("") + `<button class="btn primary" type="submit">Save pre-test</button><p class="why" id="preMsg" role="status"></p>`;
 }
 $("preForm").addEventListener("submit", e => {
   e.preventDefault(); if (S.pre) return;
   const ans = PRE.map((q, i) => { const c = document.querySelector(`input[name="p${i}"]:checked`); return c ? +c.value : null; });
-  const who = ($("preWho").value || "").trim(); if (!who) { $("preMsg").textContent = "Please type your full name first."; return; }
+  const who = ($("preWho").value || "").trim().replace(/\s+/g, " ").split(" ")[0]; if (!who) { $("preMsg").textContent = "Please type your first name."; return; }
   let miss = false; ans.forEach((a, i) => { const fs = document.querySelector(`#preForm fieldset[data-i="${i}"]`); fs.classList.toggle("missing", a === null); if (a === null) miss = true; });
   if (miss) { $("preMsg").textContent = "Please answer every question. Unanswered ones are marked in red. Choose your best answer."; return; }
   S.pre = { score: ans.filter((a, i) => a === PRE[i].a).length, ans, at: new Date().toISOString() }; S.who = who; save(); logSet("pre", { score: S.pre.score, ilo1: iloN(PRE, ans, 1), ilo3: iloN(PRE, ans, 3), at: S.pre.at }); send("pretest", { score: S.pre.score, answers: S.pre.ans.join(""), ilo1: iloN(PRE, S.pre.ans, 1), ilo3: iloN(PRE, S.pre.ans, 3) }); renderPre(); toast("Pre-test saved");
