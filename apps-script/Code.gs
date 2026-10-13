@@ -1,7 +1,7 @@
 // CodeLearn -> Google Sheets.
 // Install this script from the target spreadsheet: Extensions > Apps Script.
 const RESULT_HEAD = ["Name", "Pre /5", "Pre ILO1 /3", "Pre ILO3 /2", "Post /5", "Post ILO1 /3", "Post ILO3 /2", "Gain", "Missions /3", "Last updated"];
-const FB_HEAD = ["Time", "Activity clear", "Technology helped", "Could complete", "Improve"];
+const FB_HEAD = ["Time", "First name", "Activity clear", "Technology helped", "Could complete", "Improve"];
 
 function sheet_(ss, name, head) {
   let sh = ss.getSheetByName(name);
@@ -48,13 +48,13 @@ function doPost(e) {
       if (!r || !r.type) return;
       if (r.type === "feedback") {
         sheet_(ss, "Feedback", FB_HEAD).appendRow([
-          r.at || new Date(), r.clear || "", r.tech || "", r.done || "", safe_(r.note || "")
+          r.at || new Date(), safe_(norm_(r.who).split(" ")[0]), r.clear || "", r.tech || "", r.done || "", safe_(r.note || "")
         ]);
         return;
       }
       if (r.type !== "pretest" && r.type !== "posttest") return;
 
-      const name = norm_(r.who);
+      const name = norm_(r.who).split(" ")[0];
       if (!name) return;
       const sh = sheet_(ss, "Results", RESULT_HEAD);
       const last = sh.getLastRow();
