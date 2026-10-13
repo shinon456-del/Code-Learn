@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="CodeLearn: a hands-on HTML mini-curriculum for BTLED-ICT learners.">
-<title>For teachers | CodeLearn</title><link rel="stylesheet" href="css/style.css"></head>
+<meta name="theme-color" content="#0a64d8"><title>For teachers | CodeLearn</title><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/fx.css"><script src="js/fx.js"></script></head>
 <body><div class="blobs" aria-hidden="true"><i></i><i></i></div>
 <header class="bar"><a class="brand" href="index.html"><span class="mark">&lt;/&gt;</span>CodeLearn</a>
 <nav aria-label="Main"><a href="index.html">Home</a><a href="pretest.html">Pre-test</a><a href="lessons.html">Lessons</a><a href="lab.html">Code lab</a><a href="assessment.html">Assessment</a><a href="teacher.html" aria-current="page">For teachers</a></nav>
@@ -57,8 +57,9 @@
   </details>
 
   <details open><summary>Micro-teaching feedback form</summary>
-    <p>Have your classmates fill this in after the demo. Results are saved on this device and summarized below.</p>
+    <p>Have your classmates fill this in after the demo. Feedback is saved on this device and sent to the connected Google Sheet when configured. Use first names only.</p>
     <form id="fbForm" class="fbform">
+      <label>Your first name <input name="name" type="text" autocomplete="given-name" required maxlength="40" placeholder="First name"></label>
       <label>The activity was clear <select name="clear"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></label>
       <label>The technology helped me learn <select name="tech"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></label>
       <label>I could complete the task <select name="done"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select></label>

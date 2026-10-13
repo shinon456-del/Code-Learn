@@ -29,3 +29,13 @@ Curriculum problem alignment
 - Chosen problem: #2 – Students lack hands-on opportunities in an ICT lesson.
 - Topic: Basic HTML / Web Development.
 - CodeLearn addresses the problem through live HTML practice, missions, automatic checks, and assessment.
+
+
+Changes in v12 (style layer, additive):
+- New files: css/fx.css and js/fx.js, linked from every page. Delete both (and the two tags in each HTML head) to go back to v11.
+- Style switcher (top right): Default, Neon glow, Glassmorphism, Neo-brutalism, Blueprint, Retro VHS. The choice is remembered per device.
+- Kinetic headline (words animate in), particle network background (reacts to the mouse), scroll reveal, 3D card tilt, button shine.
+- Everything respects "reduce motion". Particles pause when the tab is hidden.
+- Fixed: the Learn > Try > Build > Check > Improve chips were unreadable in dark mode.
+
+v12.1 (clean-up): all emoji and font check marks replaced with drawn icons; two-row header on phones and tablets; 44px tap targets; 16px form text so iPhones do not zoom on focus; notch/safe-area support; fallbacks for older browsers; print stylesheet.

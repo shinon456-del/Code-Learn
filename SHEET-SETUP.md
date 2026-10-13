@@ -35,3 +35,4 @@ Good to know
 6. The script must be created from the sheet itself (Extensions > Apps Script). A script made on its own at script.google.com is not attached to any sheet.
 7. After you edit js/script.js, refresh the page with Ctrl+F5. After you edit Code.gs, redeploy: Deploy > Manage deployments > pencil > Version: New version > Deploy.
 8. Press F12 in Chrome and open the Console tab. Red errors there help find the cause. The Teacher page connection test now uses a Google Apps Script callback, so it can distinguish a deployment problem from a browser CORS warning.
+\n\n## Important privacy note\nCodeLearn now asks for first names only. The Results tab matches learners by first name, so two learners with the same first name may share a row. If that happens, use a short unique class code instead of collecting full names.\n
