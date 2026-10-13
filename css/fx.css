@@ -1,0 +1,187 @@
+/* ===== CodeLearn FX layer: themes + motion. Additive; delete this file and fx.js to revert. ===== */
+
+/* Fix: flow chips were unreadable on dark themes (white chips, light text) */
+.flow{color:#111}.flow span{color:#111}
+
+/* ---------- Style switcher ---------- */
+.fx-style{position:relative;margin-left:.25rem}
+.fx-style>button{font:inherit;font-weight:600;font-size:.85rem;min-height:36px;padding:.3rem .8rem;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;gap:.4rem;align-items:center;white-space:nowrap}
+.fx-pop{position:absolute;right:0;top:calc(100% + 10px);z-index:50;min-width:210px;padding:.4rem;border-radius:16px;background:var(--card);border:1px solid var(--line);box-shadow:0 20px 50px -15px rgba(0,0,0,.45);display:none}
+.fx-pop.open{display:grid;gap:2px;animation:rise .25s var(--ease)}
+.fx-pop button{font:inherit;text-align:left;border:0;background:transparent;color:var(--ink);padding:.55rem .75rem;min-height:40px;border-radius:10px;cursor:pointer;display:flex;justify-content:space-between;gap:1rem}
+.fx-pop button:hover,.fx-pop button[aria-pressed=true]{background:var(--tint)}
+.fx-pop button[aria-pressed=true]::after{content:"";width:.35em;height:.65em;border:solid var(--ok);border-width:0 2px 2px 0;transform:rotate(45deg);margin:.15em .3em 0 0;flex:none}
+
+/* ---------- Particle canvas ---------- */
+#fxCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;opacity:.55}
+
+/* ---------- Kinetic headline ---------- */
+.fx-on .kw{display:inline-block;opacity:0;transform:translateY(.6em) rotate(3deg);filter:blur(8px);animation:kwIn .7s var(--ease) forwards;animation-delay:calc(var(--i)*70ms + 120ms)}
+@keyframes kwIn{to{opacity:1;transform:none;filter:none}}
+.kw.hl{background:linear-gradient(90deg,var(--acc),#34c759,var(--acc));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:kwIn .7s var(--ease) forwards,hlSlide 4s linear infinite;animation-delay:calc(var(--i)*70ms + 120ms),0s}
+@keyframes hlSlide{to{background-position:200% 0}}
+
+/* ---------- Scroll reveal ---------- */
+.fx-on .rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--d,0)*70ms)}
+.fx-on .rv.in{opacity:1;transform:none}
+
+/* ---------- Button shine ---------- */
+.btn.primary{position:relative;overflow:hidden}
+.btn.primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.35) 50%,transparent 65%);transform:translateX(-120%);transition:transform .6s var(--ease)}
+.btn.primary:hover::after{transform:translateX(120%)}
+
+/* =====================  THEMES  ===================== */
+
+/* --- Neon glow --- */
+html[data-theme=neon]{color-scheme:dark;--bg:#07070f;--tint:#0d0d1c;--card:#0e0e1d;--ink:#e9f7ff;--mute:#8fa3bd;--line:rgba(0,240,255,.28);--acc:#00f0ff;--accInk:#001317;--ok:#39ff88;--bad:#ff4d8d;--glass:rgba(7,7,15,.72)}
+html[data-theme=neon] .blobs i:first-child{background:#00f0ff;opacity:.2}html[data-theme=neon] .blobs i:last-child{background:#ff2bd6;opacity:.2}
+html[data-theme=neon] h1,html[data-theme=neon] h2{text-shadow:0 0 22px rgba(0,240,255,.45)}
+html[data-theme=neon] .card,html[data-theme=neon] .path,html[data-theme=neon] .stats div,html[data-theme=neon] .pane,html[data-theme=neon] details,html[data-theme=neon] .result,html[data-theme=neon] .demo{box-shadow:0 0 0 1px rgba(0,240,255,.2),0 0 28px -8px rgba(0,240,255,.45)}
+html[data-theme=neon] .btn.primary{box-shadow:0 0 18px rgba(0,240,255,.65)}
+html[data-theme=neon] .mark{box-shadow:0 0 14px var(--acc);animation:neonFlick 5s infinite}
+@keyframes neonFlick{0%,92%,96%,100%{opacity:1}94%,98%{opacity:.55}}
+html[data-theme=neon] .stats b{text-shadow:0 0 14px currentColor}
+html[data-theme=neon] .bar nav a:hover{text-shadow:0 0 10px var(--acc)}
+html[data-theme=neon] .callout{background:linear-gradient(135deg,rgba(0,240,255,.07),rgba(255,43,214,.07))}
+html[data-theme=neon] #fxCanvas{opacity:.9}
+
+/* --- Glassmorphism --- */
+html[data-theme=glass]{color-scheme:light;--bg:#e8ecff;--tint:rgba(255,255,255,.35);--card:rgba(255,255,255,.42);--ink:#1b1b33;--mute:#4b4b6b;--line:rgba(255,255,255,.7);--acc:#5b4bff;--accInk:#fff;--glass:rgba(255,255,255,.35)}
+html[data-theme=glass]{background:radial-gradient(at 15% 10%,#ff9ac1 0,transparent 45%),radial-gradient(at 85% 15%,#9d8cff 0,transparent 45%),radial-gradient(at 60% 95%,#7de8c0 0,transparent 50%),#e8ecff;background-attachment:fixed}
+html[data-theme=glass] body{background:transparent}
+html[data-theme=glass] .card,html[data-theme=glass] .path,html[data-theme=glass] .stats div,html[data-theme=glass] .pane,html[data-theme=glass] details,html[data-theme=glass] .result,html[data-theme=glass] .demo,html[data-theme=glass] .fx-pop{backdrop-filter:blur(18px) saturate(170%);-webkit-backdrop-filter:blur(18px) saturate(170%);box-shadow:0 8px 32px -10px rgba(60,40,160,.35),inset 0 1px 0 rgba(255,255,255,.7)}
+html[data-theme=glass] .btn{backdrop-filter:blur(10px)}
+html[data-theme=glass] .blobs i{opacity:.4}
+html[data-theme=glass] #fxCanvas{opacity:.35}
+
+/* --- Neo-brutalism --- */
+html[data-theme=brutal]{color-scheme:light;--bg:#fff3c4;--tint:#ffe48a;--card:#fff;--ink:#000;--mute:#333;--line:#000;--acc:#ff5fa2;--accInk:#000;--ok:#0a7a3d;--bad:#d1001f;--glass:#fff3c4}
+html[data-theme=brutal] body{font-weight:500}
+html[data-theme=brutal] h1,html[data-theme=brutal] h2,html[data-theme=brutal] h3{font-weight:900;text-transform:uppercase;letter-spacing:-.02em}
+html[data-theme=brutal] .blobs,html[data-theme=brutal] #fxCanvas{display:none}
+html[data-theme=brutal] .bar{border-bottom:3px solid #000;backdrop-filter:none}
+html[data-theme=brutal] .card,html[data-theme=brutal] .path,html[data-theme=brutal] .stats div,html[data-theme=brutal] .pane,html[data-theme=brutal] details,html[data-theme=brutal] .result,html[data-theme=brutal] .demo,html[data-theme=brutal] .callout,html[data-theme=brutal] .fx-pop{border:3px solid #000;border-radius:10px;box-shadow:6px 6px 0 #000}
+html[data-theme=brutal] .callout{background:#9be7ff}
+html[data-theme=brutal] .btn,html[data-theme=brutal] .opt,html[data-theme=brutal] .chip,html[data-theme=brutal] .fx-style>button{border:2.5px solid #000;border-radius:8px;box-shadow:3px 3px 0 #000;font-weight:800;transition:transform .08s,box-shadow .08s}
+html[data-theme=brutal] .btn:hover,html[data-theme=brutal] .opt:hover,html[data-theme=brutal] .chip:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 #000}
+html[data-theme=brutal] .btn:active,html[data-theme=brutal] .opt:active,html[data-theme=brutal] .chip:active{transform:translate(3px,3px);box-shadow:0 0 0 #000}
+html[data-theme=brutal] .btn.primary::after{display:none}
+html[data-theme=brutal] .mark{border:2.5px solid #000;border-radius:6px;box-shadow:2px 2px 0 #000}
+html[data-theme=brutal] .stats b{color:#000}
+html[data-theme=brutal] .path:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 #000}
+html[data-theme=brutal] .rpg-panel{border:3px solid #000;box-shadow:6px 6px 0 #000;border-radius:10px}
+
+/* --- Blueprint --- */
+html[data-theme=blueprint]{color-scheme:dark;--bg:#0c3a70;--tint:rgba(255,255,255,.06);--card:rgba(255,255,255,.05);--ink:#eaf3ff;--mute:#a9c4e6;--line:rgba(255,255,255,.45);--acc:#9fdcff;--accInk:#062442;--ok:#8cffc0;--bad:#ffb09f;--glass:rgba(12,58,112,.85)}
+html[data-theme=blueprint]{background-color:#0c3a70;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.13) 1px,transparent 1px);background-size:24px 24px,24px 24px,120px 120px,120px 120px;background-attachment:fixed}
+html[data-theme=blueprint] body{background:transparent;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.95rem}
+html[data-theme=blueprint] .blobs{display:none}
+html[data-theme=blueprint] .card,html[data-theme=blueprint] .path,html[data-theme=blueprint] .stats div,html[data-theme=blueprint] .pane,html[data-theme=blueprint] details,html[data-theme=blueprint] .result,html[data-theme=blueprint] .demo,html[data-theme=blueprint] .fx-pop{border:1.5px dashed rgba(255,255,255,.6);border-radius:4px;box-shadow:none}
+html[data-theme=blueprint] h1,html[data-theme=blueprint] h2,html[data-theme=blueprint] h3{font-weight:600;letter-spacing:-.04em}
+html[data-theme=blueprint] .btn,html[data-theme=blueprint] .opt,html[data-theme=blueprint] .chip{border:1.5px solid rgba(255,255,255,.7);border-radius:3px}
+html[data-theme=blueprint] .btn.primary{background:#eaf3ff;color:#0c3a70}
+html[data-theme=blueprint] .mark{border-radius:3px}
+html[data-theme=blueprint] .eg,html[data-theme=blueprint] pre.eg,html[data-theme=blueprint] code{background:rgba(0,0,0,.25)}
+html[data-theme=blueprint] #fxCanvas{opacity:.35}
+
+/* --- Retro VHS --- */
+html[data-theme=vhs]{color-scheme:dark;--bg:#12071f;--tint:#1a0d2e;--card:#1b0f2e;--ink:#f6ecff;--mute:#b8a2d6;--line:rgba(255,62,165,.4);--acc:#ff3ea5;--accInk:#1a0420;--ok:#5cffd0;--bad:#ff7a8a;--glass:rgba(18,7,31,.78)}
+html[data-theme=vhs] body{font-family:ui-monospace,"Courier New",monospace}
+html[data-theme=vhs] h1,html[data-theme=vhs] h2{text-shadow:2px 0 #00e5ff,-2px 0 #ff3ea5;letter-spacing:-.02em;animation:vhsJit 6s steps(1) infinite}
+@keyframes vhsJit{0%,93%,100%{transform:none}94%{transform:translateX(3px) skewX(-4deg)}96%{transform:translateX(-4px)}98%{transform:translateX(2px) skewX(3deg)}}
+html[data-theme=vhs] .blobs i:first-child{background:#ff3ea5;opacity:.22}html[data-theme=vhs] .blobs i:last-child{background:#00e5ff;opacity:.15}
+html[data-theme=vhs] body::after{content:"";position:fixed;inset:0;z-index:100;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0,rgba(0,0,0,.28) 1px,transparent 1px,transparent 3px);mix-blend-mode:multiply;animation:vhsRoll 8s linear infinite}
+@keyframes vhsRoll{to{background-position:0 60px}}
+html[data-theme=vhs] .card,html[data-theme=vhs] .path,html[data-theme=vhs] .stats div,html[data-theme=vhs] .pane,html[data-theme=vhs] details,html[data-theme=vhs] .result,html[data-theme=vhs] .demo{border-radius:6px;box-shadow:0 0 0 1px rgba(0,229,255,.2),4px 4px 0 rgba(255,62,165,.35)}
+html[data-theme=vhs] .btn,html[data-theme=vhs] .opt,html[data-theme=vhs] .chip{border-radius:4px}
+html[data-theme=vhs] .stats b{text-shadow:2px 0 #00e5ff}
+html[data-theme=vhs] #fxCanvas{opacity:.7}
+
+/* ---------- Motion safety ---------- */
+@media(prefers-reduced-motion:reduce){
+  .fx-on .kw,.kw.hl{animation:none!important;opacity:1;transform:none;filter:none}
+  .fx-on .rv{opacity:1;transform:none;transition:none}
+  html[data-theme] *,html[data-theme] *::before,html[data-theme] *::after{animation:none!important}
+  #fxCanvas{display:none}
+}
+@media(max-width:800px){.fx-style>button span.lbl{display:none}}
+
+/* ---------- Polish fixes ---------- */
+/* Glass background: use a fixed layer so it covers short pages too */
+html[data-theme=glass]{background:#e8ecff}
+html[data-theme=glass] body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(at 15% 10%,#ff9ac1 0,transparent 45%),radial-gradient(at 85% 15%,#9d8cff 0,transparent 45%),radial-gradient(at 60% 95%,#7de8c0 0,transparent 50%),#e8ecff}
+/* Dark themes: calmer container behind the flow chips */
+html[data-theme=neon] .flow,html[data-theme=vhs] .flow,html[data-theme=blueprint] .flow{background:var(--tint)}
+/* Brutalism: solid highlight colour instead of gradient text */
+html[data-theme=brutal] .kw.hl{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#ff2d86}
+/* Keep the RPG battle scene on its own font so text never collides with buttons */
+html[data-theme] .rpg-panel{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+
+/* ---------- Drawn icons (no emoji / font glyph dependence) ---------- */
+.tick,.ck{display:inline-block;width:.38em;height:.7em;border:solid currentColor;border-width:0 2.5px 2.5px 0;transform:rotate(45deg) translateY(-2px);margin:0 .3em}
+.fx-style .chev{width:.45em;height:.45em;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px)}
+
+/* =====================  CLEAN + CROSS-PLATFORM  ===================== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+a,button,summary,label{-webkit-tap-highlight-color:transparent}
+.btn,.opt,.chip,.tab,.fx-style>button,.fx-pop button,summary{touch-action:manipulation}
+img,svg,video,canvas{max-width:100%}
+h1,h2,h3{overflow-wrap:break-word;text-wrap:balance}
+p,li{text-wrap:pretty}
+
+/* Comfortable tap targets everywhere (44px guideline) */
+.brand{min-height:44px}
+.bar nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 .35rem}
+.fx-style>button{min-height:44px;padding:.3rem 1rem}
+
+/* Notches and rounded screens */
+.bar{padding-left:max(clamp(1rem,4vw,3rem),env(safe-area-inset-left));padding-right:max(clamp(1rem,4vw,3rem),env(safe-area-inset-right));padding-top:max(.5rem,env(safe-area-inset-top))}
+footer{padding-bottom:max(2rem,env(safe-area-inset-bottom))}
+.toast{bottom:max(24px,env(safe-area-inset-bottom))}
+
+/* Fallbacks for browsers without color-mix() (older Android WebView, Safari < 16.2) */
+@supports not (background:color-mix(in srgb,red,blue)){
+  .opt.right{background:#dff3e8}.opt.wrong{background:#fbe3df}
+  .badge.go{background:#e1ecfb}.badge.fin{background:#dff3e8}
+  fieldset label:has(input:checked){background:#e8f0fb}
+}
+html[data-theme=glass] .bar,html[data-theme=glass] .fx-pop{-webkit-backdrop-filter:blur(18px) saturate(170%)}
+
+/* Phones: two-row header, readable nav, no iOS focus-zoom */
+@media(max-width:800px){
+  .bar{flex-wrap:wrap;gap:0 .6rem;padding-bottom:0}
+  .brand{font-size:1.05rem!important}
+  .bar .meter{margin-left:auto}
+  .bar nav{order:3;flex:1 0 100%;margin:0 -.35rem;padding:0;gap:.15rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .bar nav::-webkit-scrollbar{display:none}
+  .bar nav a{padding:0 .7rem;font-size:.92rem;flex:none}
+  .meter i{display:block;width:44px}
+  input,select,textarea,textarea#editor{font-size:16px}
+  .fx-pop{right:-.25rem}
+  .fx-style .lbl{display:inline!important}
+  .btn{width:auto}
+  .hero{padding-top:2rem}
+}
+@media(max-width:380px){.meter i{display:none}.stats{grid-template-columns:1fr 1fr}.stats b{font-size:2.1rem}}
+
+/* Large screens: keep line lengths comfortable */
+@media(min-width:1600px){html{font-size:112.5%}}
+
+/* Print: just the content */
+@media print{
+  .bar,.blobs,#fxCanvas,.fx-style,.toast,body::after,body::before{display:none!important}
+  html,body{background:#fff!important;color:#000!important}
+  .rv,.kw{opacity:1!important;transform:none!important;filter:none!important}
+  .card,.path,details{box-shadow:none!important;break-inside:avoid}
+}
+.link{min-height:44px;display:inline-flex;align-items:center}
+
+/* Two-row header on tablets and phones so nothing wraps or clips */
+.bar nav a{white-space:nowrap}
+@media(max-width:1020px){
+  .bar{flex-wrap:wrap;gap:0 .6rem;padding-bottom:0}
+  .bar .meter{margin-left:auto}
+  .bar nav{display:flex;order:3;flex:1 0 100%;margin:0 -.35rem;gap:.15rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .bar nav::-webkit-scrollbar{display:none}
+  .bar nav a{padding:0 .7rem;flex:none}
+}

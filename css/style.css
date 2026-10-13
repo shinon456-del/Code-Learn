@@ -60,7 +60,7 @@ code{font:.9em ui-monospace,Menlo,monospace;background:var(--tint);padding:.1em 
 .chip{font:inherit;font-weight:600;font-size:.9rem;padding:.55rem 1rem;min-height:44px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;transition:transform .12s var(--ease)}
 .chip:active{transform:scale(.96)}
 .chip[aria-pressed=true]{background:var(--ink);color:var(--bg)}
-.chip.done::after{content:" ✓";color:var(--ok)}
+.chip.done::after{content:"";display:inline-block;width:.32em;height:.62em;margin-left:.55em;border:solid var(--ok);border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px)}
 .chip[aria-pressed=true].done::after{color:inherit}
 .lab{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .pane{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;min-height:340px}
