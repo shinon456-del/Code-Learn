@@ -15,9 +15,9 @@ function logSet(kind, rec) {
   try { localStorage.setItem(LOGKEY, JSON.stringify(LOG)); } catch (e) {}
 }
 /* send results to the teacher's Google Sheet (see apps-script/Code.gs). Leave empty to keep everything on the device only. */
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbzHfaV5hzhVAjwkEIsFefsWsgimVeo1efo5Ox81Euc696Mzn6Ej7giVRif9Kk8DjKzwVA/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbw3F7BLSo8UcSLQnqRbI5yXtPJofihAOnXGAje4EdyQjw0VtEbmx5UFgw7Dhk-aVyqNiA/exec";
 /* optional: your Google Sheet's normal link (the one in the address bar). Only shown as a button on the teacher page. */
-const SHEET_VIEW_URL = "";
+const SHEET_VIEW_URL = "https://docs.google.com/spreadsheets/d/1Vo7c3ZE2l4MDhzkRgpZA8tb5y5-9gOu8QQ5TPoqmoHo/edit?gid=0#gid=0";
 const sentNote = () => SHEET_URL ? '<p class="why">Your results are queued for submission to your teacher. Check the teacher Google Sheet to confirm they arrived.</p>' : "";
 const iloN = (set, ans, k) => set.filter((q, i) => q.ilo === k && ans[i] === q.a).length;
 function send(type, data) {
